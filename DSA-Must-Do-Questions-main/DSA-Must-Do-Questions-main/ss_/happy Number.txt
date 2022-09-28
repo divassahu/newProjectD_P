@@ -1,0 +1,105 @@
+Happy number Ended
+Description
+
+Write an algorithm to determine if a numbernis happy.
+
+Ahappy numberis a number defined by the following process:
+
+Starting with any positive integer, replace the number by the sum of the squares of its digits.
+
+Repeat the process until the number equals 1 (where it will stay), or itloops endlesslyin a cycle which does not include 1.
+
+Those numbers for which this processends in 1are happy.
+
+
+Input
+Input Format
+The first line contains an integer t - the number of testcases.
+
+The next t lines contain the description of the t testcases.
+
+The first and only line of each testcase contains an integer n.
+
+Constraints
+1 <= t <= 30
+
+1 <= n <= 2^31-1
+
+
+Output
+Output Format
+For each testcase output Yes if the number is happy, else No on a new line.
+
+
+Sample Input 1 
+
+2
+19
+2
+Sample Output 1
+
+Yes 
+No
+Hint
+
+First testcase
+1^2 + 9^2 = 82
+
+8^2 + 2^2 = 68
+
+6^2 + 8^2 = 100
+
+1^2 + 0^2 + 0^2 = 1
+
+
+========================================================================
+
+
+function runProgram(input) {
+	input=input.trim().split("\n");
+	var tc=+input[0];
+	let line=1;
+	for(let i=1;i<=tc;i++){
+	    let n=input[line++];
+	    console.log(happyNumber(n));
+	}
+}
+    function happyNumber(n){
+         let set = new Set();
+        while(n>1){
+        sum=0;
+        while(n>0){
+            sum+=(n%10)*(n%10);
+            n=Math.floor(n/10);
+        }
+        if(set.has(sum))
+            return "No";
+        else{
+            set.add(sum);
+            n=sum;
+        }
+    }
+    return "Yes";
+    }
+
+
+if (process.env.USERNAME === "") {
+	runProgram(``);
+} else {
+	process.stdin.resume();
+	process.stdin.setEncoding("ascii");
+	let read = "";
+	process.stdin.on("data", function (input) {
+		read += input;
+	});
+	process.stdin.on("end", function () {
+		read = read.replace(/\n$/, "");
+		read = read.replace(/\n$/, "");
+		runProgram(read);
+	});
+	process.on("SIGINT", function () {
+		read = read.replace(/\n$/, "");
+		runProgram(read);
+		process.exit(0);
+	});
+}
